@@ -1,15 +1,32 @@
+{$IFDEF FPC}
+  {$IFDEF DARWIN}
+    {$Define APPLE}
+  {$ENDIF}
+{$ELSE}
+  {$IFDEF MACOS}
+    {$Define APPLE}
+  {$ENDIF}
+  {$IFDEF IOS}
+    {$Define APPLE}
+  {$ENDIF}
+{$ENDIF}
+
+
 type
   EGLNativeDisplayType={$IFDEF MSWINDOWS}HDC{$ELSE}
+  {$IFDEF APPLE}Integer{$ELSE}
   {$Message Error 'Not implemented for this platform'}
-  {$ENDIF};
+  {$ENDIF}{$ENDIF};
 
   EGLNativePixmapType={$IFDEF MSWINDOWS}HBITMAP{$ELSE}
+  {$IFDEF APPLE}Pointer{$ELSE}
   {$Message Error 'Not implemented for this platform'}
-  {$ENDIF};
+  {$ENDIF}{$ENDIF};
 
   EGLNativeWindowType={$IFDEF MSWINDOWS}HWND{$ELSE}
+  {$IFDEF APPLE}Pointer{$ELSE}
   {$Message Error 'Not implemented for this platform'}
-  {$ENDIF};
+  {$ENDIF}{$ENDIF};
 {#elif defined(__EMSCRIPTEN__)
 
 typedef int EGLNativeDisplayType;
@@ -58,12 +75,6 @@ typedef intptr_t EGLNativeWindowType;
 typedef Display *EGLNativeDisplayType;
 typedef Pixmap   EGLNativePixmapType;
 typedef Window   EGLNativeWindowType;
-
-#elif defined(__APPLE__)
-
-typedef int   EGLNativeDisplayType;
-typedef void *EGLNativePixmapType;
-typedef void *EGLNativeWindowType;
 
 #elif defined(__HAIKU__)
 
