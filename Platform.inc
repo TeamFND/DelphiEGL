@@ -15,18 +15,21 @@
 type
   EGLNativeDisplayType={$IFDEF MSWINDOWS}HDC{$ELSE}
   {$IFDEF APPLE}Integer{$ELSE}
+  {$IFDEF HAIKU}Pointer{$ELSE}
   {$Message Error 'Not implemented for this platform'}
-  {$ENDIF}{$ENDIF};
+  {$ENDIF}{$ENDIF}{$ENDIF};
 
   EGLNativePixmapType={$IFDEF MSWINDOWS}HBITMAP{$ELSE}
   {$IFDEF APPLE}Pointer{$ELSE}
+  {$IFDEF HAIKU}NativeUInt{$ELSE}
   {$Message Error 'Not implemented for this platform'}
-  {$ENDIF}{$ENDIF};
+  {$ENDIF}{$ENDIF}{$ENDIF};
 
   EGLNativeWindowType={$IFDEF MSWINDOWS}HWND{$ELSE}
   {$IFDEF APPLE}Pointer{$ELSE}
+  {$IFDEF HAIKU}NativeUInt{$ELSE}
   {$Message Error 'Not implemented for this platform'}
-  {$ENDIF}{$ENDIF};
+  {$ENDIF}{$ENDIF}{$ENDIF};
 {#elif defined(__EMSCRIPTEN__)
 
 typedef int EGLNativeDisplayType;
@@ -74,15 +77,7 @@ typedef intptr_t EGLNativeWindowType;
 
 typedef Display *EGLNativeDisplayType;
 typedef Pixmap   EGLNativePixmapType;
-typedef Window   EGLNativeWindowType;
-
-#elif defined(__HAIKU__)
-
-#include <kernel/image.h>
-
-typedef void              *EGLNativeDisplayType;
-typedef khronos_uintptr_t  EGLNativePixmapType;
-typedef khronos_uintptr_t  EGLNativeWindowType;}
+typedef Window   EGLNativeWindowType;}
 
 const
   EGLLib={$IFDEF MSWINDOWS}'libEGL.dll'{$ELSE}'libEGL.so'{$ENDIF};
