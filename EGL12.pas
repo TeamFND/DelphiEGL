@@ -95,30 +95,30 @@ const
   EGL_WIDTH=$3057;
   EGL_WINDOW_BIT=$0004;
 
-function eglChooseConfig(dpy:EGLDisplay;const attrib_list:PInteger;configs:PEGLConfig;config_size:Integer;out num_config:Integer):LongBool;{$IFDEF windows}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglCopyBuffers(dpy:EGLDisplay;surface:EGLSurface;target:EGLNativePixmapType):LongBool;{$IFDEF windows}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglCreateContext(dpy:EGLDisplay;config:EGLConfig;share_context:EGLContext;const attrib_list:PInteger):EGLContext;{$IFDEF windows}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglCreatePbufferSurface(dpy:EGLDisplay;config:EGLConfig;const attrib_list:PInteger):EGLSurface;{$IFDEF windows}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglCreatePixmapSurface(dpy:EGLDisplay;config:EGLConfig;pixmap:EGLNativePixmapType;const attrib_list:PInteger):EGLSurface;{$IFDEF windows}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglCreateWindowSurface(dpy:EGLDisplay;config:EGLConfig;win:EGLNativeWindowType;const attrib_list:PInteger):EGLSurface;{$IFDEF windows}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglDestroyContext(dpy:EGLDisplay;ctx:EGLContext):LongBool;{$IFDEF windows}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglDestroySurface(dpy:EGLDisplay;surface:EGLSurface):LongBool;{$IFDEF windows}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglGetConfigAttrib(dpy:EGLDisplay;config:EGLConfig;attribute:Integer;out value):LongBool;{$IFDEF windows}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglGetConfigs(dpy:EGLDisplay;configs:PEGLConfig;config_size:Integer;out num_config:Integer):LongBool;{$IFDEF windows}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglGetCurrentDisplay():EGLDisplay;{$IFDEF windows}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglGetCurrentSurface(readdraw:Integer):EGLSurface;{$IFDEF windows}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglGetDisplay(display_id:EGLNativeDisplayType):EGLDisplay;{$IFDEF windows}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglGetError():Integer;{$IFDEF windows}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglGetProcAddress(const procname:PAnsiChar):Pointer;{$IFDEF windows}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglInitialize(dpy:EGLDisplay;major:PInteger=nil;minor:PInteger=nil):LongBool;{$IFDEF windows}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglMakeCurrent(dpy:EGLDisplay;draw:EGLSurface;read:EGLSurface;ctx:EGLContext):LongBool;{$IFDEF windows}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglQueryContext(dpy:EGLDisplay;ctx:EGLContext;attribute:Integer;var value):LongBool;{$IFDEF windows}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglQueryString(dpy:EGLDisplay;name:Integer):PAnsiChar;{$IFDEF windows}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglQuerySurface(dpy:EGLDisplay;surface:EGLSurface;attribute:Integer;var value):LongBool;{$IFDEF windows}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglSwapBuffers(dpy:EGLDisplay;surface:EGLSurface):LongBool;{$IFDEF windows}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglTerminate(dpy:EGLDisplay):LongBool;{$IFDEF windows}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglWaitGL():LongBool;{$IFDEF windows}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglWaitNative(engine:Integer):LongBool;{$IFDEF windows}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
+function eglChooseConfig(dpy:EGLDisplay;const attrib_list:PInteger;configs:PEGLConfig;config_size:Integer;out num_config:Integer):LongBool;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
+function eglCopyBuffers(dpy:EGLDisplay;surface:EGLSurface;target:EGLNativePixmapType):LongBool;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
+function eglCreateContext(dpy:EGLDisplay;config:EGLConfig;share_context:EGLContext;const attrib_list:PInteger):EGLContext;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
+function eglCreatePbufferSurface(dpy:EGLDisplay;config:EGLConfig;const attrib_list:PInteger):EGLSurface;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
+function eglCreatePixmapSurface(dpy:EGLDisplay;config:EGLConfig;pixmap:EGLNativePixmapType;const attrib_list:PInteger):EGLSurface;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
+function eglCreateWindowSurface(dpy:EGLDisplay;config:EGLConfig;win:EGLNativeWindowType;const attrib_list:PInteger):EGLSurface;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
+function eglDestroyContext(dpy:EGLDisplay;ctx:EGLContext):LongBool;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
+function eglDestroySurface(dpy:EGLDisplay;surface:EGLSurface):LongBool;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
+function eglGetConfigAttrib(dpy:EGLDisplay;config:EGLConfig;attribute:Integer;out value):LongBool;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
+function eglGetConfigs(dpy:EGLDisplay;configs:PEGLConfig;config_size:Integer;out num_config:Integer):LongBool;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
+function eglGetCurrentDisplay():EGLDisplay;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
+function eglGetCurrentSurface(readdraw:Integer):EGLSurface;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
+function eglGetDisplay(display_id:EGLNativeDisplayType):EGLDisplay;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
+function eglGetError():Integer;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
+function eglGetProcAddress(const procname:PAnsiChar):Pointer;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
+function eglInitialize(dpy:EGLDisplay;major:PInteger=nil;minor:PInteger=nil):LongBool;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
+function eglMakeCurrent(dpy:EGLDisplay;draw:EGLSurface;read:EGLSurface;ctx:EGLContext):LongBool;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
+function eglQueryContext(dpy:EGLDisplay;ctx:EGLContext;attribute:Integer;var value):LongBool;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
+function eglQueryString(dpy:EGLDisplay;name:Integer):PAnsiChar;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
+function eglQuerySurface(dpy:EGLDisplay;surface:EGLSurface;attribute:Integer;var value):LongBool;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
+function eglSwapBuffers(dpy:EGLDisplay;surface:EGLSurface):LongBool;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
+function eglTerminate(dpy:EGLDisplay):LongBool;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
+function eglWaitGL():LongBool;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
+function eglWaitNative(engine:Integer):LongBool;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
 
 //EGL 1.1
 const
@@ -136,10 +136,10 @@ const
   EGL_TEXTURE_RGB=$305D;
   EGL_TEXTURE_RGBA=$305E;
   EGL_TEXTURE_TARGET=$3081;
-function eglBindTexImage(dpy:EGLDisplay;surface:EGLSurface;buffer:Integer):LongBool;{$IFDEF windows}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglReleaseTexImage(dpy:EGLDisplay;surface:EGLSurface;buffer:Integer):LongBool;{$IFDEF windows}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglSurfaceAttrib(dpy:EGLDisplay;surface:EGLSurface;attribute,value:Integer):LongBool;{$IFDEF windows}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglSwapInterval(dpy:EGLDisplay;interval:Integer):LongBool;{$IFDEF windows}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
+function eglBindTexImage(dpy:EGLDisplay;surface:EGLSurface;buffer:Integer):LongBool;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
+function eglReleaseTexImage(dpy:EGLDisplay;surface:EGLSurface;buffer:Integer):LongBool;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
+function eglSurfaceAttrib(dpy:EGLDisplay;surface:EGLSurface;attribute,value:Integer):LongBool;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
+function eglSwapInterval(dpy:EGLDisplay;interval:Integer):LongBool;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
 
 //EGL 1.2
 type
@@ -174,11 +174,11 @@ const
   EGL_SWAP_BEHAVIOR=$3093;
   EGL_UNKNOWN:integer=-1;
   EGL_VERTICAL_RESOLUTION=$3091;
-function eglBindAPI(api:Cardinal):LongBool;{$IFDEF windows}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglQueryAPI():Cardinal;{$IFDEF windows}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglCreatePbufferFromClientBuffer(dpy:EGLDisplay;buftype:Cardinal;buffer:EGLClientBuffer;config:EGLConfig;const attrib_list:PInteger):EGLSurface;{$IFDEF windows}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglReleaseThread():LongBool;{$IFDEF windows}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglWaitClient():LongBool;{$IFDEF windows}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
+function eglBindAPI(api:Cardinal):LongBool;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
+function eglQueryAPI():Cardinal;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
+function eglCreatePbufferFromClientBuffer(dpy:EGLDisplay;buftype:Cardinal;buffer:EGLClientBuffer;config:EGLConfig;const attrib_list:PInteger):EGLSurface;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
+function eglReleaseThread():LongBool;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
+function eglWaitClient():LongBool;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
 
 implementation
 
