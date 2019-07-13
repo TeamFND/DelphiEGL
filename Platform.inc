@@ -13,23 +13,28 @@
 
 
 type
+  {$IFDEF ANDROID}PAnsiChar=MarshaledAString;{$ENDIF}
+
   EGLNativeDisplayType={$IFDEF MSWINDOWS}HDC{$ELSE}
   {$IFDEF APPLE}Integer{$ELSE}
   {$IFDEF HAIKU}Pointer{$ELSE}
+  {$IFDEF ANDROID}Pointer{$ELSE}
   {$Message Error 'Not implemented for this platform'}
-  {$ENDIF}{$ENDIF}{$ENDIF};
+  {$ENDIF}{$ENDIF}{$ENDIF}{$ENDIF};
 
   EGLNativePixmapType={$IFDEF MSWINDOWS}HBITMAP{$ELSE}
   {$IFDEF APPLE}Pointer{$ELSE}
   {$IFDEF HAIKU}NativeUInt{$ELSE}
+  {$IFDEF ANDROID}Pointer{$ELSE}
   {$Message Error 'Not implemented for this platform'}
-  {$ENDIF}{$ENDIF}{$ENDIF};
+  {$ENDIF}{$ENDIF}{$ENDIF}{$ENDIF};
 
   EGLNativeWindowType={$IFDEF MSWINDOWS}HWND{$ELSE}
   {$IFDEF APPLE}Pointer{$ELSE}
   {$IFDEF HAIKU}NativeUInt{$ELSE}
+  {$IFDEF ANDROID}PANativeWindow{$ELSE}
   {$Message Error 'Not implemented for this platform'}
-  {$ENDIF}{$ENDIF}{$ENDIF};
+  {$ENDIF}{$ENDIF}{$ENDIF}{$ENDIF};
 {#elif defined(__EMSCRIPTEN__)
 
 typedef int EGLNativeDisplayType;
@@ -53,15 +58,6 @@ typedef struct wl_egl_window  *EGLNativeWindowType;
 typedef struct gbm_device  *EGLNativeDisplayType;
 typedef struct gbm_bo      *EGLNativePixmapType;
 typedef void               *EGLNativeWindowType;
-
-#elif defined(__ANDROID__) || defined(ANDROID)
-
-struct ANativeWindow;
-struct egl_native_pixmap_t;
-
-typedef void*                           EGLNativeDisplayType;
-typedef struct egl_native_pixmap_t*     EGLNativePixmapType;
-typedef struct ANativeWindow*           EGLNativeWindowType;
 
 #elif defined(USE_OZONE)
 
