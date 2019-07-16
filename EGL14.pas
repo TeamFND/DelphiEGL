@@ -24,9 +24,9 @@ unit EGL14;
 interface
 
 uses
-  {$IFDEF MSWINDOWS}Winapi.Windows,{$ENDIF}
+  {$IFDEF MSWINDOWS}Windows,{$ENDIF}
   {$IFDEF ANDROID}Androidapi.NativeWindow,{$ENDIF}
-  System.SysUtils;
+  SysUtils;
 
 {$i Platform.inc}
 
@@ -73,9 +73,9 @@ const
   EGL_NONE=$3038;
   EGL_NON_CONFORMANT_CONFIG=$3051;
   EGL_NOT_INITIALIZED=$3001;
-  EGL_NO_CONTEXT:EGLContext=0;
-  EGL_NO_DISPLAY:EGLDisplay=0;
-  EGL_NO_SURFACE:EGLSurface=0;
+  EGL_NO_CONTEXT:EGLContext=nil;
+  EGL_NO_DISPLAY:EGLDisplay=nil;
+  EGL_NO_SURFACE:EGLSurface=nil;
   EGL_PBUFFER_BIT=$0001;
   EGL_PIXMAP_BIT=$0002;
   EGL_READ=$305A;

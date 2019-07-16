@@ -13,7 +13,7 @@
 
 
 type
-  {$IFDEF ANDROID}PAnsiChar=MarshaledAString;{$ENDIF}
+  {$IFDEF DCC}{$IFDEF ANDROID}PAnsiChar=MarshaledAString;{$ENDIF}{$ENDIF}
 
   EGLNativeDisplayType={$IFDEF MSWINDOWS}HDC{$ELSE}
   {$IFDEF APPLE}Integer{$ELSE}
