@@ -19,13 +19,14 @@
 *OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE  *
 *SOFTWARE.                                                                      *
 ********************************************************************************}
-unit EGL15;
+unit EGL12;
 
 interface
 
 uses
   {$IFDEF MSWINDOWS}Winapi.Windows,{$ENDIF}
-  {$IFDEF ANDROID}Androidapi.NativeWindow,Androidapi.Egl,{$ENDIF}
+  {$IFDEF FPC}{$IFDEF ANDROID}native_window,{$ENDIF}
+  {$ELSEIF}{$IFDEF ANDROID}Androidapi.NativeWindow,{$ENDIF}{$ENDIF}
   System.SysUtils;
 
 {$i Platform.inc}
@@ -180,95 +181,6 @@ function eglQueryAPI():Cardinal;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}e
 function eglCreatePbufferFromClientBuffer(dpy:EGLDisplay;buftype:Cardinal;buffer:EGLClientBuffer;config:EGLConfig;const attrib_list:PInteger):EGLSurface;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
 function eglReleaseThread():LongBool;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
 function eglWaitClient():LongBool;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-
-//EGL 1.3
-const
-  EGL_CONFORMANT=$3042;
-  EGL_CONTEXT_CLIENT_VERSION=$3098;
-  EGL_MATCH_NATIVE_PIXMAP=$3041;
-  EGL_OPENGL_ES2_BIT=$0004;
-  EGL_VG_ALPHA_FORMAT=$3088;
-  EGL_VG_ALPHA_FORMAT_NONPRE=$308B;
-  EGL_VG_ALPHA_FORMAT_PRE=$308C;
-  EGL_VG_ALPHA_FORMAT_PRE_BIT=$0040;
-  EGL_VG_COLORSPACE=$3087;
-  EGL_VG_COLORSPACE_sRGB=$3089;
-  EGL_VG_COLORSPACE_LINEAR=$308A;
-  EGL_VG_COLORSPACE_LINEAR_BIT=$0020;
-
-//EGL 1.4
-const
-  EGL_DEFAULT_DISPLAY:EGLNativeDisplayType=0;
-  EGL_MULTISAMPLE_RESOLVE_BOX_BIT=$0200;
-  EGL_MULTISAMPLE_RESOLVE=$3099;
-  EGL_MULTISAMPLE_RESOLVE_DEFAULT=$309A;
-  EGL_MULTISAMPLE_RESOLVE_BOX=$309B;
-  EGL_OPENGL_API=$30A2;
-  EGL_OPENGL_BIT=$0008;
-  EGL_SWAP_BEHAVIOR_PRESERVED_BIT=$0400;
-function eglGetCurrentContext():EGLContext;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-
-//EGL 1.5
-type
-  EGLSync=Pointer;
-  EGLAttrib=NativeInt;
-  PEGLAttrib=^EGLAttrib;
-  EGLTime=UInt64;
-  EGLImage=Pointer;
-const
-  EGL_CONTEXT_MAJOR_VERSION=$3098;
-  EGL_CONTEXT_MINOR_VERSION=$30FB;
-  EGL_CONTEXT_OPENGL_PROFILE_MASK=$30FD;
-  EGL_CONTEXT_OPENGL_RESET_NOTIFICATION_STRATEGY=$31BD;
-  EGL_NO_RESET_NOTIFICATION=$31BE;
-  EGL_LOSE_CONTEXT_ON_RESET=$31BF;
-  EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT=$00000001;
-  EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT=$00000002;
-  EGL_CONTEXT_OPENGL_DEBUG=$31B0;
-  EGL_CONTEXT_OPENGL_FORWARD_COMPATIBLE=$31B1;
-  EGL_CONTEXT_OPENGL_ROBUST_ACCESS=$31B2;
-  EGL_OPENGL_ES3_BIT=$00000040;
-  EGL_CL_EVENT_HANDLE=$309C;
-  EGL_SYNC_CL_EVENT=$30FE;
-  EGL_SYNC_CL_EVENT_COMPLETE=$30FF;
-  EGL_SYNC_PRIOR_COMMANDS_COMPLETE=$30F0;
-  EGL_SYNC_TYPE=$30F7;
-  EGL_SYNC_STATUS=$30F1;
-  EGL_SYNC_CONDITION=$30F8;
-  EGL_SIGNALED=$30F2;
-  EGL_UNSIGNALED=$30F3;
-  EGL_SYNC_FLUSH_COMMANDS_BIT=$0001;
-  EGL_FOREVER=$FFFFFFFFFFFFFFFF;
-  EGL_TIMEOUT_EXPIRED=$30F5;
-  EGL_CONDITION_SATISFIED=$30F6;
-  EGL_NO_SYNC:EGLSync=0;
-  EGL_SYNC_FENCE=$30F9;
-  EGL_GL_COLORSPACE=$309D;
-  EGL_GL_COLORSPACE_SRGB=$3089;
-  EGL_GL_COLORSPACE_LINEAR=$308A;
-  EGL_GL_RENDERBUFFER=$30B9;
-  EGL_GL_TEXTURE_2D=$30B1;
-  EGL_GL_TEXTURE_LEVEL=$30BC;
-  EGL_GL_TEXTURE_3D=$30B2;
-  EGL_GL_TEXTURE_ZOFFSET=$30BD;
-  EGL_GL_TEXTURE_CUBE_MAP_POSITIVE_X=$30B3;
-  EGL_GL_TEXTURE_CUBE_MAP_NEGATIVE_X=$30B4;
-  EGL_GL_TEXTURE_CUBE_MAP_POSITIVE_Y=$30B5;
-  EGL_GL_TEXTURE_CUBE_MAP_NEGATIVE_Y=$30B6;
-  EGL_GL_TEXTURE_CUBE_MAP_POSITIVE_Z=$30B7;
-  EGL_GL_TEXTURE_CUBE_MAP_NEGATIVE_Z=$30B8;
-  EGL_IMAGE_PRESERVED=$30D2;
-  EGL_NO_IMAGE:EGLImage=0;
-function eglCreateSync(dpy:EGLDisplay;&type:Cardinal;const attrib_list:PEGLAttrib):EGLSync;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglDestroySync(dpy:EGLDisplay;sync:EGLSync):LongBool;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglClientWaitSync(dpy:EGLDisplay;sync:EGLSync;flags:Integer;timeout:EGLTime):Integer;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglGetSyncAttrib(dpy:EGLDisplay;sync:EGLSync;attribute:Integer;value:PEGLAttrib):LongBool;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglCreateImage(dpy:EGLDisplay;ctx:EGLContext;target:Cardinal;buffer:EGLClientBuffer;const attrib_list:PEGLAttrib):EGLImage;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglDestroyImage(dpy:EGLDisplay;image:EGLImage):LongBool;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglGetPlatformDisplay(&platform:Cardinal;native_display:Pointer;const attrib_list:PEGLAttrib):EGLDisplay;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglCreatePlatformWindowSurface(dpy:EGLDisplay;config:EGLConfig;native_window:Pointer;const attrib_list:PEGLAttrib):EGLSurface;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglCreatePlatformPixmapSurface(dpy:EGLDisplay;config:EGLConfig;native_pixmap:Pointer;const attrib_list:PEGLAttrib):EGLSurface;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
-function eglWaitSync(dpy:EGLDisplay;sync:EGLSync;flags:Integer):LongBool;{$IFDEF MSWINDOWS}stdcall;{$ELSE}cdecl;{$ENDIF}external EGLLib;
 
 implementation
 

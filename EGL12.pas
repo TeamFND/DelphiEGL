@@ -25,7 +25,8 @@ interface
 
 uses
   {$IFDEF MSWINDOWS}Winapi.Windows,{$ENDIF}
-  {$IFDEF ANDROID}Androidapi.NativeWindow,{$ENDIF}
+  {$IFDEF FPC}{$IFDEF ANDROID}native_window,{$ENDIF}
+  {$ELSEIF}{$IFDEF ANDROID}Androidapi.NativeWindow,{$ENDIF}{$ENDIF}
   System.SysUtils;
 
 {$i Platform.inc}
